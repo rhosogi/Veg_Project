@@ -24,20 +24,20 @@ import matplotlib.cm as cm
 
 # Create dataframe
 
-veg14 = pd.read_table('/Users/reneehosogi/Documents/GitHub_Clones/Veg_Project/diary14/veg14.csv', sep=',')
-veg13 = pd.read_table('/Users/reneehosogi/Documents/GitHub_Clones/Veg_Project/diary13/veg13.csv', sep=',')
-veg12 = pd.read_table('/Users/reneehosogi/Documents/GitHub_Clones/Veg_Project/diary12/veg12.csv', sep=',')
-veg11 = pd.read_table('/Users/reneehosogi/Documents/GitHub_Clones/Veg_Project/diary11/veg11.csv', sep=',')
-veg10 = pd.read_table('/Users/reneehosogi/Documents/GitHub_Clones/Veg_Project/diary10/veg10.csv', sep=',')
+veg14 = pd.read_table('/Users/reneehosogi/Documents/GitHub_Clones/Veg_Project/diaries10-14/veg14.csv', sep=',')
+veg13 = pd.read_table('/Users/reneehosogi/Documents/GitHub_Clones/Veg_Project/diaries10-14/veg13.csv', sep=',')
+veg12 = pd.read_table('/Users/reneehosogi/Documents/GitHub_Clones/Veg_Project/diaries10-14/veg12.csv', sep=',')
+veg11 = pd.read_table('/Users/reneehosogi/Documents/GitHub_Clones/Veg_Project/diaries10-14/veg11.csv', sep=',')
+veg10 = pd.read_table('/Users/reneehosogi/Documents/GitHub_Clones/Veg_Project/diaries10-14/veg10.csv', sep=',')
 low_memory=False
 
 # Test the read-in
 veg14.head()
 veg14.tail()
-veg13.describe()
+veg14.describe()
 veg13.index
 veg12.dtypes
-veg12.shape
+veg14.shape
 veg11.PROD_UNIT.mean()
 veg11.FOODTOT.describe()
 veg10.BEEF.value_counts()
@@ -127,14 +127,40 @@ veg10['MEAT_UNIT']= (veg10.BEEF/5.26) + (veg10.POULTRY/1.96) + (veg10.PORK/3.10)
 veg10['PROD_UNIT']= (veg10.FRSHFRUT/1.32) + (veg10.FRSHVEG/1.15) + (veg10.PROCFRUT/2.47) +(veg10.PROCVEG/1.33)
 
 
-veg14.MEAT_UNIT.describe()
+veg10.PROD_UNIT.describe()
 veg12.MEAT.describe()
-veg12.MEAT_UNIT.describe()
-veg14.PRODUCE.describe()
+veg11.MEAT.describe()
+veg13.MEAT_UNIT.describe()
+veg11.BEEF.describe()
+
+# Experimental csv files for accurate renderings
+
+veg12_v2 = pd.read_table('/Users/reneehosogi/Documents/GitHub_Clones/Veg_Project/veg12_v2.csv', sep=',')
+
+veg12_v2.shape
+veg12_v2.BEEF.mean()
+veg12_v2['MEAT_UNIT']= (veg12_v2.BEEF/4.57) + (veg12_v2.POULTRY/1.97) + (veg12_v2.PORK/3.37) + veg12_v2.SEAFOOD + (veg12_v2.OTHMEAT/2.92)
+veg12_v2['PROD_UNIT']= (veg12_v2.FRSHFRUT/1.34) + (veg12_v2.FRSHVEG/1.42) + (veg12_v2.PROCFRUT/2.66) + (veg12_v2.PROCVEG/1.44)
+veg12_v2.MEAT_UNIT.mean()
+veg12_v2.head(5)
+
+#Different method for experimental csv files
+veg11 = pd.read_table('/Users/reneehosogi/Documents/GitHub_Clones/Veg_Project/diary11/veg11.csv', sep=',')
+veg11_v2 = pd.read_csv('veg11.csv', usecols=['AGE_REF', 'FAM_SIZE', 'REF_RACE', 'REGION', 'SEX_REF', 'FOODTOT', 'FOODHOME', 'CEREAL', 'BAKEPROD', 'BEEF', 'POULTRY', 'PORK', 'OTHMEAT', 'SEAFOOD', 'FRSHFRUT', 'FRSHVEG', 'PROCFRUT', 'PROCVEG', 'SWEETS', 'NONALBEV', 'OILS', 'MISCFOOD', 'FOODAWAY', 'ALCBEV'])
+veg11_v2['MEAT_UNIT']= (veg11_v2.BEEF/4.34) + (veg11_v2.POULTRY/1.89) + (veg11_v2.PORK/3.35) + veg11_v2.SEAFOOD + (veg11_v2.OTHMEAT/3.15)
+veg11_v2['PROD_UNIT']= (veg11_v2.FRSHFRUT/1.33) + (veg11_v2.FRSHVEG/1.58) + (veg11_v2.PROCFRUT/2.76) + (veg11_v2.PROCVEG/1.42)
+veg11_v2.shape
+veg11_v2.MEAT_UNIT.mean()
+
+veg10_v2 = pd.read_csv('veg10.csv', usecols=['AGE_REF', 'FAM_SIZE', 'REF_RACE', 'REGION', 'SEX_REF', 'FOODTOT', 'FOODHOME', 'CEREAL', 'BAKEPROD', 'BEEF', 'POULTRY', 'PORK', 'OTHMEAT', 'SEAFOOD', 'FRSHFRUT', 'FRSHVEG', 'PROCFRUT', 'PROCVEG', 'SWEETS', 'NONALBEV', 'OILS', 'MISCFOOD', 'FOODAWAY', 'ALCBEV'])
+veg10['MEAT_UNIT']= (veg10.BEEF/5.26) + (veg10.POULTRY/1.96) + (veg10.PORK/3.10) + veg10.SEAFOOD + (veg10.OTHMEAT/3.22)
+veg10['PROD_UNIT']= (veg10.FRSHFRUT/1.32) + (veg10.FRSHVEG/1.15) + (veg10.PROCFRUT/2.47) +(veg10.PROCVEG/1.33)
+
 # Scatter plots for meat and produce consumption by dollar amount
 
 pd.scatter_matrix(veg[['MEAT_UNIT', 'PROD_UNIT']])
-pd.scatter_matrix(veg[['FOODHOME', 'FOODAWAY']])
+pd.scatter_matrix(veg10[['FOODHOME', 'FOODAWAY']])
+plt.savefig('VEG12_HOMAWA.png', dpi=1000)
 
 # Scatter plots for varying x-axis using meat data
 
@@ -156,25 +182,68 @@ plt.savefig('PROD_AGE.png', dpi=1000)
 veg14.plot(kind='scatter', x='REGION', y='PRODUCE', title='Produce consumption by Region')
 plt.savefig('PROD_REG.png', dpi=1000)
 
-# Other types of graphs for meats
-
-veg13.hist(column='MEAT_UNIT', by='REGION')
-veg.hist(column='PROD_UNIT', by='REGION')
-veg.MEAT_UNIT.plot(kind='hist', bins=3)
-
 # Comparison graphs
-veg10.MEAT_UNIT.mean()
+veg12.REGION.value_counts()
 veg10.PROD_UNIT.mean()
+veg10.FAM_SIZE.mean()
 
-pd.scatter_matrix(veg[['MEAT_UNIT', 'PROD_UNIT']])
+# Meat by age
+veg14.plot(kind='hist', x='MEAT_UNIT', y='AGE_REF')
+veg13.plot(kind='hist', y='AGE_REF', x='MEAT_UNIT')
+veg12.plot(kind='hist', y='AGE_REF', x='MEAT_UNIT')
+veg11.plot(kind='hist', y='AGE_REF', x='MEAT_UNIT')
+veg10.plot(kind='hist', y='AGE_REF', x='MEAT_UNIT')
 
-vpoints = np.asarray([['MEAT_UNIT', '2014', 6.71544],
-           ['MEAT_UNIT', '2013', 6.7728],
-           ['MEAT_UNIT', '2012', 1605.3779],
-           ['MEAT_UNIT', '2011', 1610.1538]
-           ['MEAT_UNIT', '2010', 1645.05]
-           ['PROD_UNIT', '2014', 9.0523],
-           ['PROD_UNIT', '2013', 10.017],
-           ['PROD_UNIT', '2012', 1741.2795]
-           ['PROD_UNIT', '2011', 1732.67029]
-           ['PROD_UNIT', '2010', 2000.2411]])
+
+# Food away vs. Food home
+veg14.FOODHOME.mean()
+veg12.FOODHOME.mean()
+veg10.FOODTOT.mean()
+veg13.FOODTOT.mean()
+veg11.FOODAWAY.mean()
+veg12.FOODAWAY.mean()
+
+# Meat by region
+veg14.groupby('REGION').MEAT_UNIT.mean()
+veg13.groupby('REGION').MEAT_UNIT.mean()
+veg12.groupby('REGION').MEAT_UNIT.mean()
+veg11.groupby('REGION').MEAT_UNIT.mean()
+veg10.groupby('REGION').MEAT_UNIT.mean()
+
+# Produce by region
+
+veg14.groupby('REGION').PROD_UNIT.mean()
+veg13.groupby('REGION').PROD_UNIT.mean()
+veg12.groupby('REGION').PROD_UNIT.mean()
+veg11.groupby('REGION').PROD_UNIT.mean()
+veg10.groupby('REGION').PROD_UNIT.mean()
+
+# Meat by FAMILY SIZE
+veg14.groupby('FAM_SIZE').MEAT_UNIT.mean()
+veg13.groupby('FAM_SIZE').MEAT_UNIT.mean()
+veg12.groupby('FAM_SIZE').MEAT_UNIT.mean()
+veg11.groupby('FAM_SIZE').MEAT_UNIT.mean()
+veg10.groupby('FAM_SIZE').MEAT_UNIT.mean()
+
+# Produce by FAMILY SIZE
+veg14.groupby('FAM_SIZE').PROD_UNIT.mean()
+veg13.groupby('FAM_SIZE').PROD_UNIT.mean()
+veg12.groupby('FAM_SIZE').PROD_UNIT.mean()
+veg11.groupby('FAM_SIZE').PROD_UNIT.mean()
+veg10.groupby('FAM_SIZE').PROD_UNIT.mean()
+
+# Meat by Age groups
+veg14.plot(column='MEAT_UNIT', by='AGE_REF')
+plt.title("Distribution of users' ages")
+plt.ylabel('count of users')
+plt.xlabel('age')
+plt.savefig('MEAT_AGE14.png', dpi=1000)
+
+veg13.PROD_UNIT.plot(kind='hist', column='BEEF', by='AGE_REF')
+plt.savefig('MEAT_AGE13.png', dpi=1000)
+veg12.AGE_REF.hist(bins=30)
+plt.savefig('MEAT_AGE12.png', dpi=1000)
+veg11.AGE_REF.hist(bins=30)
+plt.savefig('MEAT_AGE11.png', dpi=1000)
+veg10.AGE_REF.hist(bins=30)
+plt.savefig('MEAT_AGE10.png', dpi=1000)
