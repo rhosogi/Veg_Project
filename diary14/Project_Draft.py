@@ -16,7 +16,7 @@ import matplotlib.cm as cm
 # This will be how I combine quarterly data compiled by CE surveys
 # In Terminal, combine all four FMLD .csv files 
 
-# Renees-MacBook-Pro:diary14 reneehosogi$ cat < fmld141.csv <(tail +3 fmld142.csv) <(tail +3 fmld143.csv) <(tail +3 fmld144.csv) > veg14.csv
+# Renees-MacBook-Pro:diary14 reneehosogi    
 # Renees-MacBook-Pro:diary13 reneehosogi$ cat < fmld131.csv <(tail +3 fmld132.csv) <(tail +3 fmld133.csv) <(tail +3 fmld134.csv) > veg13.csv
 # Renees-MacBook-Pro:diary12 reneehosogi$ cat < fmld121.csv <(tail +3 fmld122.csv) <(tail +3 fmld123.csv) <(tail +3 fmld124.csv) > veg12.csv
 # Renees-MacBook-Pro:diary11 reneehosogi$ cat < fmld111.csv <(tail +3 fmld112.csv) <(tail +3 fmld113.csv) <(tail +3 fmld114.csv) > veg11.csv
@@ -32,7 +32,7 @@ veg10 = pd.read_table('/Users/reneehosogi/Documents/GitHub_Clones/Veg_Project/di
 low_memory=False
 
 # Test the read-in
-veg14.head()
+veg12.head()
 veg14.tail()
 veg14.describe()
 veg13.index
@@ -64,7 +64,7 @@ veg.plot(kind='scatter', x='AGE_REF', y='PORK')
 
 # Converting obj into int 
 
-veg12.PORK.describe()
+veg11.PORK.describe()
 
 veg12['BEEF']=veg12.BEEF.factorize()[0]
 veg12['PORK']=veg12.PORK.factorize()[0]
@@ -132,6 +132,23 @@ veg12.MEAT.describe()
 veg11.MEAT.describe()
 veg13.MEAT_UNIT.describe()
 veg11.BEEF.describe()
+
+# Read in columns to work with closer
+feature_cols = ['veg14.MEAT_UNIT', 'veg14.PROD_UNIT', 'veg13.MEAT_UNIT', 'veg13.PROD_UNIT''veg12.MEAT_UNIT', 'veg12.PROD_UNIT', 'veg11.MEAT_UNIT', 'veg11.PROD_UNIT', 'veg10.MEAT_UNIT', 'veg10.PROD_UNIT']
+age_cols= ['veg14.AGE','veg13.AGE','veg12.AGE','veg11.AGE','veg10.AGE']
+fam_cols = ['veg14.FAM_SIZE', 'veg13.FAM_SIZE', 'veg12.FAM_SIZE', 'veg11.FAM_SIZE', 'veg10.FAM_SIZE']
+reg_cols = ['veg14.REGION', 'veg13.REGION', 'veg12.REGION', 'veg11.REGION', 'veg10.REGION']
+meatveg = feature_cols + age_cols + reg_cols + fam_cols
+
+veg14_url = '/Users/reneehosogi/Documents/GitHub_Clones/Veg_Project/diaries10-14/veg14.csv'
+veg14_cols = ['veg14.BEEF', 'veg14.POULTRY', 'veg14.PORK', 'veg14.SEAFOOD', 'veg14.OTHMEAT', 'veg14.FRSHFRUT', 'veg14.FRSHVEG', 'veg14.PROCFRUT', 'veg14.PROCVEG', 'veg14.MEAT_UNIT', 'veg14.PROD_UNIT', 'veg14.AGE', 'veg14.FAM_SIZE', 'veg14.REGION']
+veg14 = pd.read_table(veg14_url, names=veg14_cols)
+
+veg14['MEAT_UNIT']=veg14.MEAT_UNIT.factorize()[0]
+
+meatveg = pd.merge (veg14, veg13, veg12, veg11, veg10)
+
+meatveg.describe()
 
 # Experimental csv files for accurate renderings
 
@@ -225,6 +242,9 @@ veg12.groupby('FAM_SIZE').MEAT_UNIT.mean()
 veg11.groupby('FAM_SIZE').MEAT_UNIT.mean()
 veg10.groupby('FAM_SIZE').MEAT_UNIT.mean()
 
+# BEEF vs POULTRY 
+veg14.plot(kind='scatter', x='REGION', y='FRSHFRUT', sharey='true')
+
 # Produce by FAMILY SIZE
 veg14.groupby('FAM_SIZE').PROD_UNIT.mean()
 veg13.groupby('FAM_SIZE').PROD_UNIT.mean()
@@ -247,3 +267,16 @@ veg11.AGE_REF.hist(bins=30)
 plt.savefig('MEAT_AGE11.png', dpi=1000)
 veg10.AGE_REF.hist(bins=30)
 plt.savefig('MEAT_AGE10.png', dpi=1000)
+
+# Consumption by Meat Type
+veg11.MEAT.plot(kind='box', y='REGION', x='MEAT')
+veg11.plot(kind='scatter', y='BEEF', x='POULTRY')
+
+veg14.plot(kind='scatter', y='POULTRY', x='MEAT')
+veg14.plot(kind='scatter', y='POULTRY', x='BEEF')
+
+meatveg = ('veg14.MEAT' + 'veg13.MEAT'+ 'veg12.MEAT' + 'veg11.MEAT' + 'veg10.MEAT')
+
+meatveg.describe()
+
+meatveg.plot(kind='hist', y='MEAT', x='year')

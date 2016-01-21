@@ -36,14 +36,14 @@ Meat and produce consumption in 2014, measured by age. Produce is scaled to $600
 
 Once I noted this, I used the US Department of Labor’s annual price reports to average the yearly costs of meat, produce, and processed produce to come up with average prices per unit of food type. Below is the table of price per pound that I used to divide the cost of each food product:
 
-	Beef 
-(per 500 g)	Poultry (per 500 g)	Pork 
-(per 500 g)	Other Meat (per 500 g)	Fresh Fruits (per 500 g)	Fresh Veg. (per 500 g)	Proc. Fruits (per 500 g)	Proc. Veg. (per 500 g)
-2014	$5.71	$2.04	$3.83	$3.01	$1.49	$1.57	$2.53	$1.47
-2013	$4.76	$2.02	$3.43	$3.05	$1.29	$1.49	$2.51	$1.42
-2012	$4.57	$1.97	$3.37	$2.92	$1.34	$1.42	$2.66	$1.44
-2011	$4.34	$1.89	$3.35	$3.15	$1.33	$1.58	$2.76	$1.42
-2010	$5.26	$1.96	$3.10	$3.22	$1.32	$1.15	$2.47	$1.33
+| Year   | Beef        | Poultry     |  Pork       | Other Meat | Fresh Fruits| Fresh Veg |Proc Fruits | Proc. Veg  |
+|        | (per 500 g) | (per 500 g) | (per 500 g) | (per 500 g)| (per 500 g) |(per 500 g)| (per 500 g)|(per 500 g) |
+| :----: |:-----------:|:-----------:|:---------:|:----------:|:------------:|:----------:|:----------:|:----------:|
+| 2014   |    $5.71    |    $2.04    |   $3.83   |   $3.01    |   $1.49      |   $1.57    |   $2.53    |   $1.47    |
+| 2013   |    $4.76    |    $2.02    |   $3.43   |   $3.05    |   $1.29      |   $1.49    |   $2.51    |   $1.42    |
+| 2012   |    $4.57    |    $1.97    |   $3.37   |   $2.92    |   $1.34      |   $1.42    |   $2.66    |   $1.44    |
+| 2011   |    $4.34    |    $1.89    |   $3.35   |   $3.15    |   $1.33      |   $1.58    |   $2.76    |   $1.42    |
+| 2010   |    $5.26    |    $1.96    |   $3.10   |   $3.22    |   $1.32      |   $1.15    |   $2.47    |   $1.33    |
 
 Unfortunately, regional costs per units weren’t posted, which would have given the numbers above another level of accuracy. The prices averaged were taken from the US averages of different product types, including different cuts of meats and different types of produce. Please see the attached appendix for the list of cuts of meat and types of produce factored into the price per unit averages.
 
